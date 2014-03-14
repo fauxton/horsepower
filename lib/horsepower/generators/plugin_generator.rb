@@ -23,9 +23,8 @@ module Horsepower
 
     def horsepower_customization
       invoke :hello
-      invoke :setup_rvm
-      invoke :bundle
       invoke :custom_readme
+      invoke :bundle
       invoke :goodbye
     end
 
