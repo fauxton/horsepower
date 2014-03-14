@@ -19,7 +19,21 @@ module Horsepower
     end
 
     def custom_gemfile
-      copy("horsepower_Gemfile", "Gemfile", force: true)
+      copy_file("horsepower_Gemfile", "Gemfile", force: true)
+    end
+
+    def add_gemspec_dependencies
+      inject_into_file "#{name}.gemspec", after: '"jquery-rails"' do <<-RUBY
+
+  s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "cucumber-rails"
+  s.add_development_dependency "parallel_tests"
+RUBY
+      end
+    end
+
+    def replace_readme_format_in_gemspec
+      gsub_file("#{name}.gemspec", "README.rdoc", "README.md")
     end
 
     def ruby

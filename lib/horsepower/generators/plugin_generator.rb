@@ -25,6 +25,7 @@ module Horsepower
       invoke :hello
       invoke :custom_readme
       invoke :custom_gemfile
+      invoke :custom_gemspec
       invoke :setup_rvm
       invoke :bundle
       invoke :goodbye
@@ -41,6 +42,19 @@ module Horsepower
 
     def hello
       say "Horsepower is creating your engine..."
+    end
+
+    def setup_rvm
+      build :setup_rvm
+    end
+
+    def custom_gemfile
+      build :custom_gemfile
+    end
+
+    def custom_gemspec
+      build :add_gemspec_dependencies
+      build :replace_readme_format_in_gemspec
     end
 
     def goodbye
