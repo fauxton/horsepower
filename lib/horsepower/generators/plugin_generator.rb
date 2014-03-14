@@ -1,9 +1,10 @@
 require 'rails/generators'
 require 'rails/generators/rails/app/app_generator'
-require 'rails/generators/rails/plugin/plugin_generator'
+require 'horsepower'
+Horsepower.require_plugin_generator
 
 module Horsepower
-  class PluginGenerator < Rails::Generators::PluginGenerator
+  class PluginGenerator < plugin_klass
     class_option :database, type: :string, aliases: '-d', default: 'postgresql',
       desc: "Preconfigure for selected database (options: #{DATABASES.join('/')})"
 
