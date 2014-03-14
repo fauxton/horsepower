@@ -28,6 +28,7 @@ module Horsepower
       invoke :custom_gemspec
       invoke :setup_rvm
       invoke :bundle
+      invoke :setup_test_frameworks
       invoke :goodbye
     end
 
@@ -42,6 +43,13 @@ module Horsepower
 
     def hello
       say "Horsepower is creating your engine..."
+    end
+
+    def setup_test_frameworks
+      say "Installing/configuring test frameworks..."
+      build :install_rspec
+      build :install_cucumber
+      build :configure_cucumber
     end
 
     def setup_rvm

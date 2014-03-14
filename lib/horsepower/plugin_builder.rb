@@ -22,11 +22,27 @@ module Horsepower
       copy_file("horsepower_Gemfile", "Gemfile", force: true)
     end
 
+    def install_rspec
+      generate "rspec:install"
+    end
+
+    def install_cucumber
+      generate "cucumber:install"
+    end
+
+    def configure_cucumber
+      inject_into_file "features/support/env.rb", before: "require 'cucumber/rails'" do <<-RUBY
+ENV["RAILS_ROOT"] ||= File.expand_path(File.dirname(__FILE__) + '/../../spec/dummy')
+      RUBY
+      end
+    end
+
     def add_gemspec_dependencies
       inject_into_file "#{name}.gemspec", after: '"jquery-rails"' do <<-RUBY
 
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "cucumber-rails"
+  s.add_development_dependency "database_cleaner"
   s.add_development_dependency "parallel_tests"
 RUBY
       end
