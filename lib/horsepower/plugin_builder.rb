@@ -18,6 +18,10 @@ module Horsepower
       template("README.md.erb", "README.md", force: true)
     end
 
+    def custom_gemfile
+      copy("horsepower_Gemfile", "Gemfile", force: true)
+    end
+
     def ruby
       "ruby-#{RubyVersion::MAJOR}-p#{RubyVersion::PATCH_LEVEL}"
     end
